@@ -29,23 +29,22 @@ def compute_height(n, parents):
 def main():
     # implement input form keyboard and from files
     text = input()
-    n = 0
-    parents = []
     if text[0]=="I":
         n = int(input())
-        arr= input()
-        parents = [int(x) for x in arr.split()]
+        parents_str = input()
+        parents = np.array(list(map(int, parents_str.split())))
+        height = compute_height(n, parents)
     elif text[0]=="F":
-        file_name = "test/"
-        file_name= file_name + input()
+        file_name="test/"
+        file_name = file_name + input()
         if "a" in file_name:
             return
         with open(file_name, 'r') as file:
-            text= file.read()
-            lines = text.split('\n')
-            n = int(lines[0])
-            parents = [int(x) for x in arr.split()]
-    print(compute_height(n, parents))
+            n = int(file.readline())
+            parents_str = file.readline().strip()
+            parents = np.array(list(map(int, parents_str.split())))
+            height = compute_height(n, parents)
+    print(height)   
 # In Python, the default limit on recursion depth is rather low,
 # so raise it here for this problem. Note that to take advantage
 # of bigger stack, we have to launch the computation in a new thread.
